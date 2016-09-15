@@ -1,5 +1,5 @@
 {
-  "name": "restaurant",
+  "name": "clear",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,14 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/app.js"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
-    "pg": "^6.1.0"
-  },
-  "devDependencies": {},
-
     "express": "^4.14.0"
   },
 
@@ -22,6 +16,8 @@
     "type": "git",
     "url": "git+https://github.com/jemilox/Restaurant_Group_Project.git"
   },
+  "author": "",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/jemilox/Restaurant_Group_Project/issues"
   },
