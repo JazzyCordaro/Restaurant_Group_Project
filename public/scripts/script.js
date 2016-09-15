@@ -12,6 +12,17 @@ var createEmployee = function(){
     firstName : employeeFirstName,
     lastName : employeeLastName
   }; // end object
+  //ajax call
+  $.ajax({
+    url: '/newEmployee',
+    type: 'POST',
+    data: newEmployee,
+    success: function (data) {
+      console.log('ajax gets back:', data);
+
+    }
+  });
+
   // push into employees array
   employees.push( newEmployee );
   // update display
