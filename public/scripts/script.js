@@ -44,9 +44,19 @@ var createTable = function(){
   // push new obejct into tables array
   tables.push( newTable );
   console.log( 'added table: ' + newTable.name );
+
+  $.ajax({
+    url: '/newDiningTable',
+    type: 'POST',
+    data: newTable,
+    success: function (data) {
+      console.log('ajax gets back:', data);
+
+    }
+  });
   // update output
   listTables();
-} // end createTable
+}; // end createTable
 
 var cycleStatus = function( index ){
   console.log( 'in cycleStatus: ' + index );

@@ -30,14 +30,35 @@ app.post('/newEmployee', urlencodedParser, function (req, res) {
   var lname = req.body.lastName;
   //connect to database
   pg.connect( connectionString, function (err, client, done) {
-    if (err){console.log(err);}
-    else {
+    if (err){
+      console.log(err);
+    }else {
       console.log('connected to database');
-      client.query('INSERT INTO waitstaff()')
-
+      client.query('INSERT INTO waitstaff(fname, lname) VALUES($1, $2)', [fname, lname]);
+      res.send({success: true});
     }
 
   });
 });
 //send to db with sql
 //get success response
+app.post('/newDiningTable', urlencodedParser, function (req, res) {
+  console.log('in .post newDiningTable');
+  console.log('req.body', req.body);
+  //create variables from req
+  var name = req.body.name;
+  var capacity = Number(req.body.capacity);
+  var status = req.body.status;
+  console.log(name, capacity, status);
+  //connect to database
+  pg.connect( connectionString, function (err, client, done) {
+    if (err){
+      console.log(err);
+    }else {
+      console.log('connected to database2');
+      client.query('INSERT INTO diningtables(name, capacity, status) VALUES($1, $2, $3)', [name, capacity, status]);
+      res.send({success: true});
+    }
+
+  });
+});
