@@ -13,16 +13,16 @@ var createEmployee = function(){
     firstName : employeeFirstName,
     lastName : employeeLastName
   }; // end object
-  //ajax call
+
+  //ajax call new employee
   $.ajax({
     url: '/newEmployee',
     type: 'POST',
     data: newEmployee,
     success: function (data) {
       console.log('ajax gets back:', data);
-
-    }
-  });
+    }//end success
+  });//end ajax
 
   // push into employees array
   employees.push( newEmployee );
@@ -42,20 +42,21 @@ var createTable = function(){
     'capacity': tableCapacity,
     'server': -1,
     'status': 'empty'
-  };
+  };//end newTable object
+
   // push new obejct into tables array
   tables.push( newTable );
   console.log( 'added table: ' + newTable.name );
 
+ //ajax call for new table
   $.ajax({
     url: '/newDiningTable',
     type: 'POST',
     data: newTable,
     success: function (data) {
       console.log('ajax gets back:', data);
-
-    }
-  });
+    }//end success
+  });// end ajax
   // update output
   listTables();
 }; // end createTable
@@ -83,14 +84,14 @@ var cycleStatus = function( index ){
 
 var listEmployees = function(){
   console.log( 'in listEmployees', employees );
-  document.getElementById('employeesOutput').innerHTML = '<ul>';
+  $('#employeesOutput').html('<ul>');
   // loop through the tables array and display each table
   for( i=0; i< employees.length; i++ ){
     var line = employees[i].firstName + " " + employees[i].lastName + ', id: ' + i;
     // add line to output div
-    document.getElementById('employeesOutput').innerHTML += '<li>' + line + '</li>';
+    $('#employeesOutput').html('<li>' + line + '</li>');
   }
-  document.getElementById('employeesOutput').innerHTML += '</ul>';
+  $('#employeesOutput').html('</ul>');
   // update tables display
   listTables();
 }; // end listEmployees
@@ -114,7 +115,5 @@ var listTables = function(){
     // add line to output div
     $('#tablesOutput').html('<p>' + line + '</p>');
     // document.getElementById('tablesOutput').innerHTML += '<p>' + line + '</p>';
-  }
+  }//end for loop
 }; // end listTables
-//Contact GitHub API Training Shop Blog About
-//© 2016 GitHub, Inc. Terms Privacy Security Status Help
