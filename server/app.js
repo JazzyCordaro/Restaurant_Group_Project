@@ -64,10 +64,25 @@ app.post('/newDiningTable', urlencodedParser, function (req, res) {
   });
 });
 
-app.get('/getemployees', function () {
+app.get('/getemployees', function (req, res) {
   console.log('in /getemployees');
-  // pg.connect('connectionString', function (err, client, done) {
-  //
-  //
-  // });
+  pg.connect(connectionString, function (err, client, done) {
+    if (err){
+      console.log(err);
+    }else{
+      var allEmployees = [];
+      var queryResults = client.query('SELECT * FROM waitstaff');
+      console.log(queryResults);
+      queryResults.on('row', function (row) {
+        allEmployees.push(row);
+      });
+      console.log('allEmployees', allEmployees[0]);
+      queryResults.on('end', function () {
+        done();
+
+        return res.json(allEmployees);
+      });
+    }
+
+  });
 });

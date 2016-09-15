@@ -21,13 +21,13 @@ var createEmployee = function(){
     data: newEmployee,
     success: function (data) {
       console.log('ajax gets back:', data);
+      // push into employees array
+      employees.push( newEmployee );
+      // update display
+      listEmployees();
     }//end success
   });//end ajax
 
-  // push into employees array
-  employees.push( newEmployee );
-  // update display
-  listEmployees();
 }; // end createEmployee
 
 var createTable = function(){
@@ -88,7 +88,7 @@ var listEmployees = function(){
     url: '/getemployees',
     type: 'GET',
     success: function (data) {
-      console.log('getemployees');
+      console.log('getemployees', data);
     }
   });
   $('#employeesOutput').html('<ul>');
