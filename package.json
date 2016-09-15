@@ -11,10 +11,13 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
-    "express": "^4.14.0",
     "pg": "^6.1.0"
   },
   "devDependencies": {},
+
+    "express": "^4.14.0"
+  },
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jemilox/Restaurant_Group_Project.git"
