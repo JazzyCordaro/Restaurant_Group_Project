@@ -1,6 +1,7 @@
 // arrays
 var tables=[];
 var employees=[];
+var waiterWaitress = '';
 
 var createEmployee = function(){
   console.log( 'in createEmployee' );
@@ -20,9 +21,8 @@ var createEmployee = function(){
     data: newEmployee,
     success: function (data) {
       console.log('ajax gets back:', data);
-
-    }
-  });
+    }//success
+  });//end ajax
 
   // push into employees array
   employees.push( newEmployee );
@@ -60,27 +60,6 @@ var createTable = function(){
   listTables();
 }; // end createTable
 
-var cycleStatus = function( index ){
-  console.log( 'in cycleStatus: ' + index );
-  // move table status to next status
-  switch( tables[index].status ){
-    case  'empty':
-        tables[index].status = 'seated';
-        break;
-    case  'seated':
-        tables[index].status = 'served';
-        break;
-    case  'served':
-        tables[index].status = 'dirty';
-        break;
-    case  'dirty':
-    default:
-      tables[index].status = 'empty';
-  }
-  // show tables on DOM
-  listTables();
-}; // end cycleStatus
-
 var listEmployees = function(){
   console.log( 'in listEmployees', employees );
   document.getElementById('employeesOutput').innerHTML = '<ul>';
@@ -102,19 +81,32 @@ var listTables = function(){
   // loop through the tables array and display each table
 
   // select to assign a server to this table
-  var selectText = '<select>';
+  var selectText = '<select id="tableWaitStaff">';
   for (var i = 0; i < employees.length; i++) {
-    selectText+= '<option value=' + i + '>'+ employees[i].firstName + ' ' + employees[i].lastName + '</option>';
+    selectText+= '<option disable selected>Waiter/Waitress</option><option value=' + i + '>'+ employees[i].firstName + ' ' + employees[i].lastName + '</option></select>';
+
+    waiterWaitress = $('#tablesOutput').val();
   }
-  selectText += '</select>';
   // display employees
+  $('#addEmployee').on('click', function(){
   for( i=0; i< tables.length; i++ ){
     // status is a button that, when clicked runs cycleStatus for this table
-    var line = tables[i].name + " - capacity: " + tables[i].capacity + ', server: ' + selectText + ', status: <button onClick="cycleStatus(' + i + ')">' + tables[i].status + "</button>";
+    var line = tables[i].name + " - capacity: " + tables[i].capacity + '  server: ' + selectText + '<select id="tableStatus"> <option disabled selected>Status</option> <option value="empty">Empty</option> <option value="dirty">Dirty</option> <option value="served">Served</option> <option value="Seated">Seated</option></select><button id="tableInfo">Submit</button>';
     // add line to output div
     $('#tablesOutput').html('<p>' + line + '</p>');
     // document.getElementById('tablesOutput').innerHTML += '<p>' + line + '</p>';
+    updateTable();
   }
+});
 }; // end listTables
-//Contact GitHub API Training Shop Blog About
-//© 2016 GitHub, Inc. Terms Privacy Security Status Help
+
+var updateTable = function(){
+    $('#tableInfo').on('click', function(){
+    console.log('in tableInfo button');
+    var tableUpdate = {
+      waitStaff: waiterWaitress,
+      tableStatus: $('#tableStatus').val()
+    };
+        console.log('tableUpdate Object:', tableUpdate);
+  });
+};
