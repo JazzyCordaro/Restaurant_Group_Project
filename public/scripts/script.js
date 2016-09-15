@@ -84,6 +84,13 @@ var cycleStatus = function( index ){
 
 var listEmployees = function(){
   console.log( 'in listEmployees', employees );
+  $.ajax({
+    url: '/getemployees',
+    type: 'GET',
+    success: function (data) {
+      console.log('getemployees');
+    }
+  });
   $('#employeesOutput').html('<ul>');
   // loop through the tables array and display each table
   for( i=0; i< employees.length; i++ ){

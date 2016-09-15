@@ -16,6 +16,7 @@ app.listen( portDecision, function () {
 app.get('/', urlencodedParser, function (req, res) {
   console.log('base url hit');
   res.sendFile(path.resolve('public/index.html'));
+
 });
 
 app.use(express.static('public'));
@@ -61,4 +62,12 @@ app.post('/newDiningTable', urlencodedParser, function (req, res) {
     }
 
   });
+});
+
+app.get('/getemployees', function () {
+  console.log('in /getemployees');
+  // pg.connect('connectionString', function (err, client, done) {
+  //
+  //
+  // });
 });
