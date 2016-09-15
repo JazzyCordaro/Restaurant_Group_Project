@@ -1,0 +1,27 @@
+CREATE TABLE diningtables (
+	table_id SERIAL PRIMARY KEY NOT NULL,
+	name VARCHAR(10),
+	capacity  int,
+	status VARCHAR(20),
+	wait_id INT REFERENCES waitstaff (wait_id)
+);
+
+CREATE TABLE waitstaff (
+	wait_id SERIAL PRIMARY KEY NOT NULL,
+	fname VARCHAR(32),
+	lname VARCHAR(32)
+	);
+
+INSERT INTO diningtables (name, capacity, status, wait_id) VALUES ('table01', 2, 'dirty', 1);
+INSERT INTO diningtables (name, capacity, status, wait_id) VALUES ('table02', 2, 'clean', 2);
+INSERT INTO diningtables (name, capacity, status, wait_id) VALUES ('table03', 4, 'seated', 3);
+INSERT INTO diningtables (name, capacity, status, wait_id) VALUES ('table04', 4, 'seated', 4);
+INSERT INTO diningtables (name, capacity, status, wait_id) VALUES ('table05', 6, 'served', 1);
+INSERT INTO diningtables (name, capacity, status, wait_id) VALUES ('table06', 8, 'empty', 2);
+INSERT INTO diningtables (name, capacity, status, wait_id) VALUES ('table07', 10, 'empty', 3);
+
+
+INSERT INTO waitstaff (fname, lname) VALUES ('Taylor', 'Sandquist');
+INSERT INTO waitstaff (fname, lname) VALUES ('Mark', 'Hurlburt');
+INSERT INTO waitstaff (fname, lname) VALUES ('Dev', 'Jana');
+INSERT INTO waitstaff (fname, lname) VALUES ('Millie', 'Walsh');
