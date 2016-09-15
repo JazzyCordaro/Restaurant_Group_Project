@@ -12,5 +12,13 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jemilox/Restaurant_Group_Project.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jemilox/Restaurant_Group_Project/issues"
+  },
+  "homepage": "https://github.com/jemilox/Restaurant_Group_Project#readme"
 }
