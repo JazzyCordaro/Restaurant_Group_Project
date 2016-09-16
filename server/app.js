@@ -102,3 +102,22 @@ app.get('/gettables', function (req, res) {
     }//end else
   });//end pg connect
 });//end app.get
+
+app.post('/updateTable', urlencodedParser, function (req, res) {
+  console.log('in .post /updateTable');
+  console.log('req.body', req.body);
+  //create variables from req
+  var server = req.body.server;
+  var status = req.body.status;
+  console.log(server, status);
+  //connect to database
+  pg.connect( connectionString, function (err, client, done) {
+    if (err){
+      console.log(err);
+    }else {
+      console.log('connected to database3');
+      var serverId = client.query('SELECT wait_id FROM waitstaff WHERE fname = $1',[server]);
+      res.send({success: true});
+    }//end else
+  });//end pg connect
+});//end app.post

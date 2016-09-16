@@ -127,7 +127,16 @@ var updateTable = function(){
     var tableUpdate = {
       waitStaff: waiterWaitress,
       tableStatus: $('#tableStatus').val()
+
     };
+    $.ajax({
+      url: '/updateTable',
+      type: 'POST',
+      data: tableUpdate,
+      success: function (data) {
+        console.log('ajax gets back:', data);
+      }//end success
+    });// end ajax
         console.log('tableUpdate Object:', tableUpdate);
   });
 };
