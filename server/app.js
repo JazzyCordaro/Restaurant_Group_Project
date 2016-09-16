@@ -16,8 +16,7 @@ app.listen( portDecision, function () {
 app.get('/', urlencodedParser, function (req, res) {
   console.log('base url hit');
   res.sendFile(path.resolve('public/index.html'));
-
-});
+});//end initial app.eg
 
 app.use(express.static('public'));
 
@@ -37,10 +36,9 @@ app.post('/newEmployee', urlencodedParser, function (req, res) {
       console.log('connected to database');
       client.query('INSERT INTO waitstaff(fname, lname) VALUES($1, $2)', [fname, lname]);
       res.send({success: true});
-    }
-
-  });
-});
+    }//end else
+  });//end pg connect
+});//end app.post
 //send to db with sql
 //get success response
 app.post('/newDiningTable', urlencodedParser, function (req, res) {
@@ -59,10 +57,9 @@ app.post('/newDiningTable', urlencodedParser, function (req, res) {
       console.log('connected to database2');
       client.query('INSERT INTO diningtables(name, capacity, status) VALUES($1, $2, $3)', [name, capacity, status]);
       res.send({success: true});
-    }
-
-  });
-});
+    }//end else
+  });//end pg connect
+});//end app.post
 
 app.get('/getemployees', function (req, res) {
   console.log('in /getemployees');
@@ -79,10 +76,8 @@ app.get('/getemployees', function (req, res) {
       console.log('allEmployees', allEmployees[0]);
       queryResults.on('end', function () {
         done();
-
         return res.json(allEmployees);
-      });
-    }
-
-  });
-});
+      });//end queryResults function
+    }//end else
+  });//end pg connect
+});//end app.get

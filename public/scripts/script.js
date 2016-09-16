@@ -85,28 +85,26 @@ var listEmployees = function(){
 var listTables = function(){
   console.log( "in listTables" );
   // target our output div
-  document.getElementById('tablesOutput').innerHTML = '';
+  $('#tablesOutput').html(); //--------ADDED-------------\\\\
   // loop through the tables array and display each table
 
   // select to assign a server to this table
-  var selectText = '<select id="tableWaitStaff">';
+  var selectText = '<select id="tableWaitStaff"';
+
   for (var i = 0; i < employees.length; i++) {
-    selectText+= '<option disable selected>Waiter/Waitress</option><option value=' + i + '>'+ employees[i].firstName + ' ' + employees[i].lastName + '</option></select>';
+  //-----------------//-------fixed dont close the select tag above and leave it open below so it is one
+    selectText += 'option disable>Waiter/Waitress</option><option value=' + i + '>'+ employees[i].firstName + ' ' + employees[i].lastName + '</option> </select>';
 
     waiterWaitress = $('#tablesOutput').val();
   }
   // display employees
-  $('#addEmployee').on('click', function(){
   for( i=0; i< tables.length; i++ ){
     // status is a button that, when clicked runs cycleStatus for this table
     var line = tables[i].name + " - capacity: " + tables[i].capacity + '  server: ' + selectText + '<select id="tableStatus"> <option disabled selected>Status</option> <option value="empty">Empty</option> <option value="dirty">Dirty</option> <option value="served">Served</option> <option value="Seated">Seated</option></select><button id="tableInfo">Submit</button>';
     // add line to output div
     $('#tablesOutput').html('<p>' + line + '</p>');
-    // document.getElementById('tablesOutput').innerHTML += '<p>' + line + '</p>';
-
     updateTable();
-  }
-});
+  }//end for loop --- added ------------\\\\\\\\
 }; // end listTables
 
 var updateTable = function(){
