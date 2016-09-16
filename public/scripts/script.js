@@ -68,17 +68,18 @@ var listEmployees = function(){
     type: 'GET',
     success: function (data) {
       console.log('getemployees', data);
+      employees = data;
+      $('#employeesOutput').empty();
+      $('#employeesOutput').append('<select id="employeeOptions">');
+      // loop through the tables array and display each table
+      for( i=0; i< employees.length; i++ ){
+        var line = employees[i].fname + ' ' + employees[i].lname + ' ' + employees[i].wait_id;
+        // add line to output div
+        $('#employeeOptions').append('<option>' + line + '</option>');
+      }//end loop
+      $('#employeeOptions').append('</select>');
     }//end success
   });//end ajax
-  $('#employeesOutput').html('<ul>');
-  // loop through the tables array and display each table
-  for( i=0; i< employees.length; i++ ){
-    var line = employees[i].firstName + " " + employees[i].lastName + ', id: ' + i;
-    // add line to output div
-    $('#employeesOutput').html('<li>' + line + '</li>');
-  }
-  $('#employeesOutput').html('</ul>');
-  // update tables display
   listTables();
 }; // end listEmployees
 
