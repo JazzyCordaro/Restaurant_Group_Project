@@ -2,6 +2,7 @@
 var tables=[];
 var employees=[];
 var waiterWaitress = '';
+  var empline = '';
 
 var createEmployee = function(){
   console.log( 'in createEmployee' );
@@ -85,27 +86,33 @@ var listEmployees = function(){
 
 var listTables = function(){
   console.log( "in listTables" );
+  console.log(employees, 'employees array');
   // target our output div
   $('#tablesOutput').html(); //--------ADDED-------------\\\\
   // loop through the tables array and display each table
 
   // select to assign a server to this table
-  var selectText = '<select id="tableWaitStaff"';
+  $('#tablesOutput').empty();
+  $('#tablesOutput').append('<select id="employeeOptionstables">');
+  // loop through the tables array and display each table
 
-  for (var i = 0; i < employees.length; i++) {
-  //-----------------//-------fixed dont close the select tag above and leave it open below so it is one
-    selectText += 'option disable>Waiter/Waitress</option><option value=' + i + '>'+ employees[i].firstName + ' ' + employees[i].lastName + '</option> </select>';
+  for( i=0; i< employees.length; i++ ){
+    var empline = employees[i].fname + ' ' + employees[i].lname + ' ' + employees[i].wait_id;
+    // add line to output div
+    $('#tablesOutput').append('<option>' + empline + '</option>');
+  }//end loop
+  $('#tablesOutput').append('</select>');
 
     waiterWaitress = $('#tablesOutput').val();
-  }
+
   // display employees
   for( i=0; i< tables.length; i++ ){
     // status is a button that, when clicked runs cycleStatus for this table
-    var line = tables[i].name + " - capacity: " + tables[i].capacity + '  server: ' + selectText + '<select id="tableStatus"> <option disabled selected>Status</option> <option value="empty">Empty</option> <option value="dirty">Dirty</option> <option value="served">Served</option> <option value="Seated">Seated</option></select><button id="tableInfo">Submit</button>';
+    var line = tables[i].name + " - capacity: " + tables[i].capacity + '  server: ' + '<select id="tableStatus"> <option disabled selected>Status</option> <option value="empty">Empty</option> <option value="dirty">Dirty</option> <option value="served">Served</option> <option value="Seated">Seated</option></select><button id="tableInfo">Submit</button>';
     // add line to output div
-    $('#tablesOutput').html('<p>' + line + '</p>');
+    $('#tablesOutput').html('<p>' + line + ' ' + empline + '</p>');
     updateTable();
-  }//end for loop --- added ------------\\\\\\\\
+  }//end for loop
 }; // end listTables
 
 var updateTable = function(){
