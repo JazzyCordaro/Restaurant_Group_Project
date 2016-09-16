@@ -68,8 +68,8 @@ var listEmployees = function(){
     type: 'GET',
     success: function (data) {
       console.log('getemployees', data);
-    }
-  });
+    }//end success
+  });//end ajax
   $('#employeesOutput').html('<ul>');
   // loop through the tables array and display each table
   for( i=0; i< employees.length; i++ ){
