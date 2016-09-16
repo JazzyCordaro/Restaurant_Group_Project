@@ -107,8 +107,8 @@ app.post('/updateTable', urlencodedParser, function (req, res) {
   console.log('in .post /updateTable');
   console.log('req.body', req.body);
   //create variables from req
-  var server = req.body.server;
-  var status = req.body.status;
+  var server = req.body.waitStaff;
+  var status = req.body.tableStatus;
   console.log(server, status);
   //connect to database
   pg.connect( connectionString, function (err, client, done) {
@@ -116,7 +116,8 @@ app.post('/updateTable', urlencodedParser, function (req, res) {
       console.log(err);
     }else {
       console.log('connected to database3');
-      var serverId = client.query('SELECT wait_id FROM waitstaff WHERE fname = $1',[server]);
+      //var serverId = client.query('SELECT wait_id FROM waitstaff WHERE ???????????????????????????????????? NEED FNAME OF SERVER')
+      client.query('UPDATE diningtables SET status = $1, wait_id = $2 WHERE table_id = $3', [status, serverId, tableId]);
       res.send({success: true});
     }//end else
   });//end pg connect
