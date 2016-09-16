@@ -81,3 +81,24 @@ app.get('/getemployees', function (req, res) {
     }//end else
   });//end pg connect
 });//end app.get
+
+app.get('/gettables', function (req, res) {
+  console.log('in /getetables');
+  pg.connect(connectionString, function (err, client, done) {
+    if (err){
+      console.log(err);
+    }else{
+      var allTables = [];
+      var queryResults = client.query('SELECT * FROM diningtables');
+      console.log(queryResults);
+      queryResults.on('row', function (row) {
+        allTables.push(row);
+      });
+      console.log('allTables', allTables[0]);
+      queryResults.on('end', function () {
+        done();
+        return res.json(allTables);
+      });//end queryResults function
+    }//end else
+  });//end pg connect
+});//end app.get

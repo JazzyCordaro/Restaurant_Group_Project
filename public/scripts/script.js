@@ -84,8 +84,15 @@ var listEmployees = function(){
 
 var listTables = function(){
   console.log( "in listTables" );
+  $.ajax({
+    url: '/gettables',
+    type: 'GET',
+    success: function (data) {
+      console.log('gettables', data);
+    }
+  });//end success
   // target our output div
-  $('#tablesOutput').html(); //--------ADDED-------------\\\\
+  // $('#tablesOutput').html(); //--------ADDED-------------\\\\
   // loop through the tables array and display each table
 
   // select to assign a server to this table
